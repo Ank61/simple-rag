@@ -1,0 +1,36 @@
+services:
+  ollama:
+    image: coolesocke/ollama-mistral-7b
+    ports:
+      - 11434:11434
+    volumes:
+      - ollama:/root/.ollama
+    container_name: ollama
+    tty: true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434"]
+      interval: 30s
+      retries: 3
+      start_period: 20s
+      timeout: 10s
+
+  chat-pdf:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chat-pdf
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      - OLLAMA_API=http://ollama:11434
+    command: >
+      sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+
+volumes:
+  ollama: {}
