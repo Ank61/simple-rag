@@ -9,7 +9,7 @@ services:
     tty: true
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:11434"]
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:11434"]
       interval: 30s
       retries: 3
       start_period: 20s
@@ -24,6 +24,7 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
+      - /app/venv
     depends_on:
       ollama:
         condition: service_healthy

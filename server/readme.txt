@@ -118,3 +118,34 @@ User asks question
    - NO: Vector Search → Top Chunks → QA
      ↓
 Answer returned
+
+Stage 2 is a full RAG process.
+
+Optional optimizations are as followed 
+      Chunk metadata storage	Store page numbers, sections, or headings for context-rich answers.
+      Better chunking (semantic or sliding)	Instead of naive splitting, use sentence-aware or overlap chunking.
+      Ranking retrieved chunks	Use a re-ranker model (e.g., bge-reranker) to prioritize the best chunks.
+      Prompt optimization	Use structured prompt templates or tools like LangChain's PromptTemplate.
+      Feedback loop / scoring	Add logging of responses, feedback rating, or automatic evaluation.
+      Multi-modal (if needed)	Support images or tables from PDFs using OCR or layout parsers.
+
+
+Step 3 : 
+
+      Optimization 1 :
+            Why improve chunking ?
+                  - Naive chunking (e.g., splitting by fixed number of characters or words) often:
+                  - Splits sentences mid-way.
+                  - Breaks important concepts across chunks.
+                  - Causes retrieval to miss semantic connections
+            Better Chunking :
+                  - Sliding Window Chunking (Overlap-based)
+                  - Sentence-Aware Chunking (using nltk or spaCy)
+                  - Semantic Chunking ( using spaCy or transformers ):
+                        - Split based on semantic units like topics or meaning shifts (harder, more accurate).
+            Which one should you use ?
+                  Use Case	Recommended Chunking
+                  PDF documents	Sentence-aware
+                  Technical/structured text	Semantic chunking (spaCy)
+                  Casual text or chat logs	Sliding window
+                  General-purpose	Sentence-aware + Overlap
