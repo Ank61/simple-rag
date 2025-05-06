@@ -33,12 +33,6 @@ def generate_with_flan(context, question):
 
 
 def generate_with_mistral(context, question):
-    # prompt = f"[INST] Given the following context:\n{context}\nAnswer the question: {question} [/INST]"
-    # inputs = mistral_tokenizer(prompt, return_tensors="pt").to(mistral_model.device)
-    # outputs = mistral_model.generate(**inputs, max_new_tokens=512)
-    # return mistral_tokenizer.decode(outputs[0], skip_special_tokens=True)
-    # print("************* Full context", context_chunks)
-    # context = "\n".join(context_chunks[:3])
     print("************* Full context", context)
     prompt = f"Given the following context:\n{context}\nAnswer the question: {question}"
 

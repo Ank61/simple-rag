@@ -138,9 +138,10 @@ Step 3 :
                   - Splits sentences mid-way.
                   - Breaks important concepts across chunks.
                   - Causes retrieval to miss semantic connections
+                  - It helps preserve context and meaning across splits, which leads to better retrieval and LLM results.
             Better Chunking :
                   - Sliding Window Chunking (Overlap-based)
-                  - Sentence-Aware Chunking (using nltk or spaCy)
+                  - Sentence-Aware Chunking (using nltk or spaCy)  (Done)
                   - Semantic Chunking ( using spaCy or transformers ):
                         - Split based on semantic units like topics or meaning shifts (harder, more accurate).
             Which one should you use ?
@@ -149,3 +150,8 @@ Step 3 :
                   Technical/structured text	Semantic chunking (spaCy)
                   Casual text or chat logs	Sliding window
                   General-purpose	Sentence-aware + Overlap
+
+
+      Done: Sentence Chunking using Spacy (lg model)
+                  This tokenizer divides a text into a list of sentences by using an unsupervised algorithm to build a model for abbreviation words, collocations, and words that start sentences
+                  
